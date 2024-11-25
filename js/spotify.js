@@ -1,14 +1,7 @@
 
-  
-  
-  
-  
-  
-  
-  
   const APIController = (function(){
 
-    const clientId = '4fd3bee81b9d4fbda67e18b6501ce4c0';       //declaring variables
+    const clientId = '4fd3bee81b9d4fbda67e18b6501ce4c0';       //Storing these here is bad practice, I was not sure if I was meant to do work with node/react to hide it based on the project description
     const clientSecret = '047498b6315342808c7ba8f13e42c3fe';
 
     //private methods
