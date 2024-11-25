@@ -3,6 +3,17 @@
 
 This web application allows users to explore the latest music releases and browse playlists from Spotify. It uses Spotify's Web API to fetch **new releases** and **playlists** from the public Spotify catalog.
 
+## API Key Usage
+
+In this project, I use the Spotify API to fetch new releases and top tracks. The API key (client ID) is embedded in the frontend JavaScript to demonstrate how to make API requests.
+
+However, **this is not a secure implementation** for production purposes because the API keys are exposed in the frontend. If this project were to be deployed for production, I would move the API request to a backend server (e.g., Node.js) and securely store the API keys using **environment variables**.
+
+### Important:
+
+- This is an educational project and meant to demonstrate working with APIs on the frontend.
+- For real applications, API keys should never be exposed in frontend code. Instead, you should use a **backend** to handle API calls and securely store API keys.
+
 ## Features
 - Browse **new music releases** based on your selected genre.
 - Browse **Spotify playlists** by genre.
