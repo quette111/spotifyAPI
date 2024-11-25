@@ -65,5 +65,5 @@ git clone https://github.com/yourusername/spotify-new-releases-playlists.git
 2. **Developers** must obtain their own **Spotify Developer credentials** (Client ID and Client Secret) to run the app.
 3. The **Client Credentials Flow** is used to access public data, so there is no need for user login.
 
-Let me know if you'd like any changes to the README!
+
 
