@@ -30,7 +30,7 @@ const APIController = (function() {
     }
     
     // Private method to get genres from Spotify
-    const _getGenres = async (token) => {
+   const _getGenres = async (token) => {
         try {
             const result = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_US`, {
                 method: 'GET', // GET request to fetch genres
@@ -46,6 +46,7 @@ const APIController = (function() {
             return data.categories.items; // Return the genre items
         } catch (error) {
             console.error("Error fetching genres:", error); // Log the error
+            alert("Error fetching genres: " + error.message); 
             throw error; // Rethrow the error to propagate it up to the caller
         }
     }
@@ -69,6 +70,8 @@ const APIController = (function() {
             return data.playlists.items; // Return the playlist items
         } catch (error) {
             console.error("Error fetching playlists by genre:", error); // Log the error to the console
+            alert("Error fetching playlists: " + error.message); 
+
             throw error; // Rethrow the error to propagate it up to the caller
         }
     }
@@ -76,49 +79,29 @@ const APIController = (function() {
 
     // Private method to get tracks for a playlist
     const _getTracks = async (token, tracksEndPoint) => {
-        try {
-            const limit = 10; // Set a limit for how many tracks to fetch
 
-            const result = await fetch(`${tracksEndPoint}?limit=${limit}`, {
-                method: 'GET', // GET request to fetch tracks from the playlist
-                headers: { 'Authorization' : 'Bearer ' + token} // Use the token for authorization
-            });
+        const limit = 10; // Set a limit for how many tracks to fetch
 
-            // Check if the response is ok (status code 200)
-            if (!result.ok) {
-                throw new Error(`Failed to fetch tracks from playlist: ${result.status} ${result.statusText}`);
-            }
+        const result = await fetch(`${tracksEndPoint}?limit=${limit}`, {
+            method: 'GET', // GET request to fetch tracks from the playlist
+            headers: { 'Authorization' : 'Bearer ' + token} // Use the token for authorization
+        });
 
-            const data = await result.json(); // Parse the response data to JSON
-            return data.items; // Return the track items
-        } catch (error) {
-            console.error("Error fetching tracks:", error); // Log the error
-            throw error; // Rethrow the error to propagate it up to the caller
-        }
+        const data = await result.json(); // Parse the response data to JSON
+        return data.items; // Return the track items
     }
-
 
     // Private method to get details of a specific track
     const _getTrack = async (token, trackEndPoint) => {
-        try {
-            const result = await fetch(`${trackEndPoint}`, {
-                method: 'GET', // GET request to fetch details of a specific track
-                headers: { 'Authorization' : 'Bearer ' + token} // Use the token for authorization
-            });
 
-            // Check if the response is ok (status code 200)
-            if (!result.ok) {
-                throw new Error(`Failed to fetch track details: ${result.status} ${result.statusText}`);
-            }
+        const result = await fetch(`${trackEndPoint}`, {
+            method: 'GET', // GET request to fetch details of a specific track
+            headers: { 'Authorization' : 'Bearer ' + token} // Use the token for authorization
+        });
 
-            const data = await result.json(); // Parse the response data to JSON
-            return data; // Return the track data
-        } catch (error) {
-            console.error("Error fetching track details:", error); // Log the error
-            throw error; // Rethrow the error to propagate it up to the caller
-        }
+        const data = await result.json(); // Parse the response data to JSON
+        return data; // Return the track data
     }
-
 
     // Public methods to allow external access to private methods
     return {
