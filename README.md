@@ -1,7 +1,17 @@
-
 # Spotify New Releases and Playlists App
 
 This web application allows users to explore the latest music releases and browse playlists from Spotify. It uses Spotify's Web API to fetch **new releases** and **playlists** from the public Spotify catalog.
+
+## API Key Usage
+
+In this project, I use the Spotify API to fetch new releases and top tracks. The API key (client ID) is embedded in the frontend JavaScript to demonstrate how to make API requests.
+
+However, **this is not a secure implementation** for production purposes because the API keys are exposed in the frontend. If this project were to be deployed for production, I would move the API request to a backend server (e.g., Node.js) and securely store the API keys using **environment variables**.
+
+### Important:
+
+- This is an educational project and meant to demonstrate working with APIs on the frontend.
+- For real applications, API keys should never be exposed in frontend code. Instead, you should use a **backend** to handle API calls and securely store API keys.
 
 ## Features
 - Browse **new music releases** based on your selected genre.
@@ -37,26 +47,6 @@ The app uses **Client Credentials Flow** to authenticate the app itself with Spo
 - The app fetches publicly available data such as **new releases** and **public playlists**. End-users **do not need to sign in** to view the information displayed on the app.
 
 ---
-
-## Setup Instructions (For Developers)
-
-To run the app on your local machine or deploy it yourself, follow these steps:
-
-### 1. Create a Spotify Developer Account
-
-- Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
-- Log in with your Spotify account or create one.
-- Create a new **App** to get your **Client ID** and **Client Secret**.
-- Once your app is created, you will be provided with these credentials, which you'll need for accessing the Spotify Web API.
-
-### 2. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/spotify-new-releases-playlists.git
-
-### 3. && add credentials
-
-
 ---
 
 ### Key Points in This README:
@@ -64,6 +54,3 @@ git clone https://github.com/yourusername/spotify-new-releases-playlists.git
 1. **End-users** can use the app without any login or credentials — they can view the data displayed (new releases and playlists).
 2. **Developers** must obtain their own **Spotify Developer credentials** (Client ID and Client Secret) to run the app.
 3. The **Client Credentials Flow** is used to access public data, so there is no need for user login.
-
-Let me know if you'd like any changes to the README!
-
