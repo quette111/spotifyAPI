@@ -1,8 +1,9 @@
+
 // APIController Module
 const APIController = (function() {
     
     const clientId = "4fd3bee81b9d4fbda67e18b6501ce4c0"; // Storing credentials in code is not a secure practice. Normally, you should use environment variables or a backend to keep them safe.
-    const clientSecret = "047498b6315342808c7ba8f13e42c3fe"; // Same for client secret.
+    const clientSecret = "9c15dceae58d4ab0895c563da4a6299d"; // Same for client secret.
 
     // Private method to retrieve an access token from Spotify
     const _getToken = async () => {
@@ -32,7 +33,7 @@ const APIController = (function() {
     // Private method to get genres from Spotify
    const _getGenres = async (token) => {
         try {
-            const result = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_US`, {
+            const result = await fetch(`https://api.spotify.com/v1/browse/categories`, {
                 method: 'GET', // GET request to fetch genres
                 headers: { 'Authorization' : 'Bearer ' + token} // Use the token for authorization
             });
@@ -50,31 +51,38 @@ const APIController = (function() {
             throw error; // Rethrow the error to propagate it up to the caller
         }
     }
+    ;
 
     // Private method to fetch playlists by genre
     const _getPlaylistByGenre = async (token, genreId) => {
+        if (!genreId) {
+            throw new Error("Genre ID is undefined or invalid.");
+        }
         try {
-            const limit = 10; // Set a limit for how many playlists to fetch
-            
-            const result = await fetch(`https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`, {
-                method: 'GET', // GET request to fetch playlists for a specific genre
-                headers: { 'Authorization' : 'Bearer ' + token} // Use the token for authorization
+            const limit = 10;
+            const url = `https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`;
+            console.log("Fetching playlists from URL:", url);
+    
+            const result = await fetch(url, {
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + token },
             });
-
-            // Check if the response is ok (status code 200)
+    
             if (!result.ok) {
+                const errorData = await result.json();
+                console.error("API Error Response:", errorData);
                 throw new Error(`Failed to fetch playlists for genre ${genreId}: ${result.status} ${result.statusText}`);
             }
-
-            const data = await result.json(); // Parse the response data to JSON
-            return data.playlists.items; // Return the playlist items
+    
+            const data = await result.json();
+            console.log("Fetched playlists:", data);
+            return data.playlists.items;
         } catch (error) {
-            console.error("Error fetching playlists by genre:", error); // Log the error to the console
-            alert("Error fetching playlists: " + error.message); 
-
-            throw error; // Rethrow the error to propagate it up to the caller
+            console.error("Error fetching playlists by genre:", error);
+            throw error;
         }
-    }
+    };
+
 
 
     // Private method to get tracks for a playlist
@@ -277,3 +285,4 @@ const APPController = (function(UICtrl, APICtrl) {
 
 // Initialize the app
 APPController.init();
+

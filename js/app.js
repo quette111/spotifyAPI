@@ -1,8 +1,8 @@
 // APIController.js 
 
 const APIController = (function() {
-  const clientId = "4fd3bee81b9d4fbda67e18b6501ce4c0"; // Storing these here is bad practice, I was not sure if I was meant to do work with node/react to hide it based on the project description
-  const clientSecret = "047498b6315342808c7ba8f13e42c3fe"; // client secret
+  const clientId = "4fd3bee81b9d4fbda67e18b6501ce4c0"; // Important to note that storing these here is bad practice
+  const clientSecret = "9c15dceae58d4ab0895c563da4a6299d"; // client secret
 
   // Get Spotify access token (client credentials flow)
   const _getToken = async () => {
